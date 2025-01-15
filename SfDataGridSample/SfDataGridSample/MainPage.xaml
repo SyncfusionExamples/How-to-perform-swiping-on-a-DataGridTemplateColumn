@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.DataGrid;assembly=Syncfusion.Maui.DataGrid"
+             xmlns:local="clr-namespace:SfDataGridSample"
+             x:Class="SfDataGridSample.MainPage">
+
+    <ContentPage.BindingContext>
+        <local:EmployeeViewModel x:Name="viewModel" />
+    </ContentPage.BindingContext>
+
+    <syncfusion:SfDataGrid x:Name="dataGrid"
+                           ItemsSource="{Binding Employees}"
+                           ColumnWidthMode="Auto"
+                           AutoGenerateColumnsMode="None"
+                           AllowSwiping="True"
+                           GridLinesVisibility="Both"
+                           MaxSwipeOffset="150"
+                           RowHeight="60"
+                           HeaderGridLinesVisibility="Both">
+
+        <syncfusion:SfDataGrid.LeftSwipeTemplate>
+            <DataTemplate>
+                <Grid BackgroundColor="#6750A4"
+                      Padding="0">
+                    <Label Text="EDIT"
+                           HorizontalTextAlignment="Center"
+                           TextColor="#FFFFFF"
+                           VerticalTextAlignment="Center"
+                           LineBreakMode="NoWrap"
+                           BackgroundColor="Transparent" />
+                </Grid>
+            </DataTemplate>
+        </syncfusion:SfDataGrid.LeftSwipeTemplate>
+
+        <syncfusion:SfDataGrid.Columns>
+            <syncfusion:DataGridNumericColumn MappingName="EmployeeID"
+                                              Format="#"
+                                              HeaderText="Employee ID" />
+            <syncfusion:DataGridTemplateColumn MappingName="Name"
+                                               HeaderText="Employee Details">
+                <syncfusion:DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <Grid InputTransparent="True"
+                              ColumnSpacing="0"
+                              RowSpacing="0"
+                              HorizontalOptions="FillAndExpand"
+                              Margin="0"
+                              ColumnDefinitions="*,*,*"
+                              RowDefinitions="10,*,10">
+                            <StackLayout Margin="2"
+                                         BackgroundColor="White"
+                                         Orientation="Vertical"
+                                         HorizontalOptions="FillAndExpand"
+                                         VerticalOptions="FillAndExpand"
+                                         Grid.Column="0"
+                                         Grid.ColumnSpan="3"
+                                         Grid.Row="1">
+                                <StackLayout Orientation="Horizontal"
+                                             HorizontalOptions="FillAndExpand">
+                                    <Label Text="Employee ID: "
+                                           HorizontalTextAlignment="Start"
+                                           FontSize="13"
+                                           Padding="0,0,4,0" />
+                                    <Label Text="{Binding EmployeeID}"
+                                           FontAttributes="Bold"
+                                           TextColor="Black"
+                                           FontSize="13"
+                                           HorizontalTextAlignment="Start" />
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal"
+                                             HorizontalOptions="FillAndExpand">
+                                    <Label Text="Employee Name:"
+                                           HorizontalTextAlignment="Start"
+                                           FontSize="13"
+                                           Padding="0,0,4,0" />
+                                    <Label Text="{Binding Name}"
+                                           FontAttributes="Bold"
+                                           TextColor="Black"
+                                           FontSize="13"
+                                           HorizontalTextAlignment="Start" />
+                                </StackLayout>
+                            </StackLayout>
+                        </Grid>
+                    </DataTemplate>
+                </syncfusion:DataGridTemplateColumn.CellTemplate>
+            </syncfusion:DataGridTemplateColumn>
+            <syncfusion:DataGridTextColumn MappingName="Title"
+                                           HeaderText="Designation" />
+            <syncfusion:DataGridDateColumn MappingName="HireDate"
+                                           HeaderText="Hire Date" />
+
+        </syncfusion:SfDataGrid.Columns>
+    </syncfusion:SfDataGrid>
+</ContentPage>
